@@ -1,0 +1,15 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #8da3c3;
+  align-items: center; /* Center-aligns all content horizontally */
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center-aligns main content vertically */
+  width: 100%; /* Ensures main content takes up full width */
+}
