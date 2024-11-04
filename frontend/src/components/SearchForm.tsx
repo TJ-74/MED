@@ -19,7 +19,7 @@ const SearchForm: React.FC = () => {
     const [selectedService, setSelectedService] = useState<Service | Service[] | null>(null);
 
     useEffect(() => {
-        axios.get<Service[]>('https://med-lemon-ten.vercel.app/api/services')
+        axios.get<Service[]>('https://med-reveal.vercel.app/api/services')
             .then(response => {
                 console.log('Fetched services:', response.data);
                 const allServices = response.data;
@@ -52,7 +52,7 @@ const SearchForm: React.FC = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get('https://med-lemon-ten.vercel.app/api/service', {
+            const response = await axios.get('https://med-reveal.vercel.app/api/service', {
                 params: { serviceCode: searchTerm, zipCode }
             });
             setSelectedService(response.data);
