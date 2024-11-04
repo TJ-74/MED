@@ -5,6 +5,8 @@ const { readCSV } = require('./csvReader');
 const app = express();
 const PORT = 3001;
 
+require("dotenv").config();
+
 app.use(cors());
 app.use(express.json());
 
@@ -26,7 +28,6 @@ app.get('/api/services', async (req, res) => {
         if (!servicesData.length) {
             servicesData = await readCSV();
         }
-        console.log('CSV data loaded successfully.');
         res.json(servicesData);
     } catch (error) {
         res.status(500).send('Error reading CSV file');
