@@ -5,7 +5,7 @@ const { readFromSupabase } = require('./supabaseReader');
 const app = express();
 const PORT = 3001;
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'https://med-lemon-ten.vercel.app/' }));
 app.use(express.json());
 
 let servicesData = [];
@@ -106,7 +106,7 @@ app.get('/api/service', (req, res) => {
         })
         .filter(service => service !== null)
         .sort((a, b) => a.zipDifference - b.zipDifference)
-        .slice(0, 2); // Get the top 2 nearest matches
+        .slice(0, 3); // Get the top 2 nearest matches
 
     // Log the nearest matches and their details
     console.log('Nearest matches found:');
