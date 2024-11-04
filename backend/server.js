@@ -1,43 +1,45 @@
 const express = require('express');
 const cors = require('cors');
-const { readCSV } = require('./csvReader');
+const { readFromSupabase } = require('./supabaseReader');
 
 const app = express();
 const PORT = 3001;
 
-require("dotenv").config();
-
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 
 let servicesData = [];
 
-// Load CSV data when the server starts
-readCSV()
+// Load data from Supabase when the server starts
+// Load data from Supabase when the server starts
+readFromSupabase()
     .then((data) => {
         servicesData = data;
-        console.log('CSV data loaded successfully.');
+        console.log('Data loaded from Supabase successfully.');
+        console.log('Loaded Data:', servicesData); // Added this line to print the data
     })
     .catch((error) => {
-        console.error('Error loading CSV data:', error);
+        console.error('Error loading data from Supabase:', error);
     });
+
 
 app.get('/', (req, res) => {
     res.send('Welcome to the API. Use /api/services or /api/service for API access.');
 });
 
-
-// Endpoint to get service codes from CSV
 app.get('/api/services', async (req, res) => {
     try {
         if (!servicesData.length) {
-            servicesData = await readCSV();
+            servicesData = await readFromSupabase();
         }
         res.json(servicesData);
     } catch (error) {
-        res.status(500).send('Error reading CSV file');
+        console.error('Error reading data from Supabase:', error); // Log the full error
+        res.status(500).send('Error reading data from Supabase');
     }
 });
+
+
 
 // Enhanced endpoint to search for hospital and price by serviceCode and nearest zipCodes
 app.get('/api/service', (req, res) => {
@@ -127,5 +129,6 @@ app.get('/api/service', (req, res) => {
 });
 
 
-module.exports = app;
-
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
