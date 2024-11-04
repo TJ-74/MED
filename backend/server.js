@@ -20,6 +20,11 @@ readCSV()
         console.error('Error loading CSV data:', error);
     });
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the API. Use /api/services or /api/service for API access.');
+});
+
+
 // Endpoint to get service codes from CSV
 app.get('/api/services', async (req, res) => {
     try {
