@@ -26,6 +26,7 @@ app.get('/api/services', async (req, res) => {
         if (!servicesData.length) {
             servicesData = await readCSV();
         }
+        console.log('CSV data loaded successfully.');
         res.json(servicesData);
     } catch (error) {
         res.status(500).send('Error reading CSV file');
