@@ -5,7 +5,7 @@ const { readFromSupabase } = require('./supabaseReader');
 const app = express();
 const PORT = 3001;
 
-app.use(cors({ origin: 'https://med-lemon-ten.vercel.app/' }));
+app.use(cors({ origin: 'https://med-lemon-ten.vercel.app' }));
 app.use(express.json());
 
 let servicesData = [];
