@@ -3,7 +3,7 @@ const csvParser = require('csv-parser');
 
 const readCSV = () => {
     return new Promise((resolve, reject) => {
-        const filePath = 'Cigna_LocalPlus_rows.csv';
+        const filePath = './backend/Cigna_LocalPlus_rows.csv';
 
         // Check if the file exists before attempting to read it
         if (!fs.existsSync(filePath)) {
